@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const projects = [
   {
@@ -96,7 +96,70 @@ function ProjectCard({ project }) {
   );
 }
 
+function ProjectModal({ project, closeModal }) {
+  // Close modal when clicking outside the modal content
+  const handleOutsideClick = (e) => {
+    if (e.target.classList.contains("modal-overlay")) {
+      closeModal();
+    }
+  };
+
+  return (
+    <div
+      className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={handleOutsideClick}
+    >
+      <div className="bg-white rounded-lg p-8 w-3/4 md:w-1/2 relative" onClick={(e) => e.stopPropagation()}>
+        {/* Close Button (X) */}
+        <button 
+          onClick={closeModal} 
+          className="absolute top-2 right-5 text-gray-500 hover:text-gray-700 text-3xl"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+
+        <h3 className="text-2xl font-bold text-brand-primary mb-4">
+          {project.title}
+        </h3>
+        <p className="text-gray-700 mb-6">{project.description}</p>
+        <div className="mb-6">
+          <h4 className="font-semibold text-gray-800 mb-2">Technologies</h4>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map(tech => (
+              <span 
+                key={tech} 
+                className="bg-brand-secondary/10 text-brand-secondary px-2 py-1 rounded-full text-sm"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h4 className="font-semibold text-gray-800 mb-2">Key Features</h4>
+          <ul className="list-disc list-inside text-gray-700">
+            {project.features.map(feature => (
+              <li key={feature}>{feature}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Projects() {
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const openModal = (project) => {
+    setSelectedProject(project);
+  };
+
+  const closeModal = () => {
+    setSelectedProject(null);
+  };
+
   return (
     <section id="projects" className="py-12">
       <div className="container mx-auto px-4">
@@ -106,10 +169,20 @@ function Projects() {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map(project => (
-            <ProjectCard key={project.title} project={project} />
+            <div 
+              key={project.title} 
+              onClick={() => openModal(project)} 
+              className="cursor-pointer"
+            >
+              <ProjectCard project={project} />
+            </div>
           ))}
         </div>
-        
+
+        {selectedProject && (
+          <ProjectModal project={selectedProject} closeModal={closeModal} />
+        )}
+
         {/* Button to Projects Page */}
         <div className="text-center mt-8">
           <a href="/projects" className="inline-block bg-brand-primary text-white py-2 px-4 rounded-lg shadow-md hover:bg-brand-secondary transition duration-300">
@@ -120,6 +193,5 @@ function Projects() {
     </section>
   );
 }
-
 
 export default Projects;

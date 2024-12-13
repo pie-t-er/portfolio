@@ -2,11 +2,13 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Projects from './components/Projects';
 import Experience from './components/Experience';
+import Hero from './components/Hero';
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+      <Hero />
       <main className="flex-grow">
         <Projects />
         <Experience />
@@ -17,5 +19,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
