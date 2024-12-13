@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+.modal-overlay {
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.modal-overlay.opacity-0 {
+  opacity: 0;
+  transform: translateY(20px); /* Initial state when not visible */
+}
+
+.modal-overlay.opacity-100 {
+  opacity: 1;
+  transform: translateY(0); /* Final state when visible */
+}
+
+.modal-overlay .transform {
+  transition: transform 0.3s ease-out;
+}
+
+
+.skill-bar-container {
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #3490dc; /* Replace with your brand primary color */
+  transition: width 1s ease-out;
+}

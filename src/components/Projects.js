@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const projects = [
   {
@@ -97,6 +97,15 @@ function ProjectCard({ project }) {
 }
 
 function ProjectModal({ project, closeModal }) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Set the modal visibility to true when it is shown
+  useEffect(() => {
+    if (project) {
+      setIsVisible(true);
+    }
+  }, [project]);
+
   // Close modal when clicking outside the modal content
   const handleOutsideClick = (e) => {
     if (e.target.classList.contains("modal-overlay")) {
@@ -104,15 +113,30 @@ function ProjectModal({ project, closeModal }) {
     }
   };
 
+  // Set the modal visibility to false when closing
+  const handleCloseModal = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      closeModal(); // Close the modal after the animation finishes
+    }, 300); // Match this delay with the animation duration
+  };
+
   return (
     <div
-      className="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      className={`modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-all duration-300 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
       onClick={handleOutsideClick}
     >
-      <div className="bg-white rounded-lg p-8 w-3/4 md:w-1/2 relative" onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`bg-white rounded-lg p-8 w-3/4 md:w-1/2 relative transition-all duration-300 ${
+          isVisible ? 'transform translate-y-0' : 'transform translate-y-5 opacity-0'
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Close Button (X) */}
         <button 
-          onClick={closeModal} 
+          onClick={handleCloseModal} 
           className="absolute top-2 right-5 text-gray-500 hover:text-gray-700 text-3xl"
           aria-label="Close"
         >
@@ -183,7 +207,6 @@ function Projects() {
           <ProjectModal project={selectedProject} closeModal={closeModal} />
         )}
 
-        {/* Button to Projects Page */}
         <div className="text-center mt-8">
           <a href="/projects" className="inline-block bg-brand-primary text-white py-2 px-4 rounded-lg shadow-md hover:bg-brand-secondary transition duration-300">
             View All Projects
