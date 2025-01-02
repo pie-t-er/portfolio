@@ -1,8 +1,10 @@
 import React from 'react';
+import DarkModeToggle from './DarkMode';
+import DownloadResume from './Resume';
 
 function Hero() {
   return (
-    <section className="bg-brand-primary text-white py-20">
+    <section className="hero bg-brand-primary text-white py-20">
       <div className="container mx-auto px-4 text-center">
         <h1 className="text-4xl font-bold mb-4">
           Hello, I'm Pieter Alley
@@ -17,6 +19,8 @@ function Hero() {
         >
           See My Projects
         </a>
+        <DarkModeToggle />
+        <DownloadResume />
       </div>
     </section>
   );
