@@ -10,7 +10,7 @@ const experiences = [
       'Developed an app and created a handoff document for digital assets',
       'Conducted user research and usability testing in a cross-cultural context'
     ],
-    technologies: ['WordPress', 'HTML', 'CSS', 'JavaScript', 'React', 'Electron', 'GitHub']
+    technologies: ['WordPress', 'HTML', 'CSS', 'JavaScript', 'React', 'Electron', 'Agile']
   },
   {
     title: 'Certified Trainer',
@@ -21,7 +21,7 @@ const experiences = [
       'Trained new team members, enhancing overall team performance',
       'Upheld commitment to sustainability and quality'
     ],
-    technologies: ['Team Leadership', 'Training', 'Customer Service']
+    technologies: ['Team Leadership', 'Training', 'Customer Service', 'Food Service']
   },
   {
     title: 'Walk-Around Camp Counselor',
@@ -32,28 +32,28 @@ const experiences = [
       'Lifeguard, First-Aid, and CPR Certified',
       'Guided campers in skill-building and educational workshops'
     ],
-    technologies: ['Youth Development', 'Leadership', 'Safety Management']
+    technologies: ['Youth Development', 'Leadership', 'Safety Management', 'Behavior Management']
   }
 ];
 
 function ExperienceCard({ experience }) {
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 mb-6 transition-all hover:shadow-xl">
+    <div className="shadow-md rounded-lg p-6 mb-6 transition-all hover:shadow-xl">
       <div className="flex justify-between items-start mb-4">
         <div>
           <h3 className="text-xl font-bold text-brand-primary">
             {experience.title}
           </h3>
-          <p className="text-gray-700 text-md">
+          <p className="text-md">
             {experience.company}
           </p>
         </div>
-        <span className="text-sm text-gray-500 font-medium">
+        <span className="text-sm font-medium">
           {experience.date}
         </span>
       </div>
       
-      <ul className="list-disc list-inside text-gray-700 mb-4 space-y-2">
+      <ul className="list-disc list-inside mb-4 space-y-2">
         {experience.highlights.map((highlight, index) => (
           <li key={index}>{highlight}</li>
         ))}

@@ -4,6 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --background-light: #ffffff;
+  --text-light: #000000;
+  --primary-light: #0554ff;
+
+  --background-dark: #140636;
+  --text-dark: #ffffff;
+  --primary-dark: #000000;
+
+  --hero-bg-light: #1e40af;
+  --hero-bg-dark: #1a1a40;
+}
+
 body {
-  @apply bg-brand-background text-gray-900;
+  background-color: var(--background-light);
+  color: var(--text-light);
 }
