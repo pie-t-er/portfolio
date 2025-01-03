@@ -19,7 +19,6 @@ function Hero() {
         >
           See My Projects
         </a>
-        <DarkModeToggle />
         <DownloadResume />
       </div>
     </section>

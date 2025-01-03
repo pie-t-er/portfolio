@@ -21,11 +21,3 @@ body {
   background-color: var(--background-light);
   color: var(--text-light);
 }
-
-.dark-mode .bg-brand-primary {
-  background-color: var(--primary-dark);
-}
-
-.dark-mode .text-brand-primary {
-  color: var(--primary-dark);
-}
