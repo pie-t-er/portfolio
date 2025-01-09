@@ -1,5 +1,4 @@
 import React from 'react';
-import DarkModeToggle from './DarkMode';
 import DownloadResume from './Resume';
 
 function Hero() {
