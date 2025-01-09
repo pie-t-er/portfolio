@@ -9,3 +9,7 @@
 
 [build.environment]
   NODE_VERSION = "16.20.2"
+  GO_VERSION = "none"
+  PYTHON_VERSION = "none"
+  RUBY_VERSION = "none"
+  PHP_VERSION = "none"
