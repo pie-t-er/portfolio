@@ -1,5 +1,5 @@
 [build]
-  command = "CI=false yarn build"
+  command = "yarn install && CI=false yarn build"
   publish = "build"
 
 [[redirects]]
@@ -9,7 +9,8 @@
 
 [build.environment]
   NODE_VERSION = "16.20.2"
-  GO_VERSION = "none"
-  PYTHON_VERSION = "3.9"
-  RUBY_VERSION = "none"
-  PHP_VERSION = "none"
+  SKIP_PYTHON_SETUP = "true"
+  PYTHON_VERSION = ""
+
+[build.processing]
+  skip_processing = true
