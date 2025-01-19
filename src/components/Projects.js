@@ -33,17 +33,6 @@ const projects = [
       'Sleek and minimalist UI'
     ],
     githubLink: "https://github.com/pie-t-er/hower"
-  },
-  {
-    title: 'Noah',
-    description: "The training application for Ghana's Ark Foundation team on website maintenance.",
-    technologies: ['Agile', 'Electron React', 'UI/UX'],
-    features: [
-      'Modularized tutorital formulation',
-      'Custom tutorial creation',
-      'Simple UI, easily navigable'
-    ],
-    githubLink: "https://github.com/eli-johnson-04/noah"
   }
 ];
 

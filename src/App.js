@@ -16,7 +16,7 @@ function App() {
         <Skills />
       </main>
       <footer className="bg-gray-200 p-4 text-center">
-        © 2024 Pieter Alley
+        © 2025 Pieter Alley
       </footer>
     </div>
   );
