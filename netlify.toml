@@ -4,3 +4,5 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  SKIP_PYTHON_SETUP = "true"
+  PYTHON_VERSION = ""
