@@ -1,4 +1,4 @@
-# Pieter Alley — Portfolio
+# Portfolio
 
 Personal portfolio and blog for an active software engineering / data science job search. Built with Astro 5, React islands, and Tailwind CSS. Deploys to Netlify on push to `main`.
 
@@ -64,7 +64,7 @@ All posts live in `src/content/blog/` as Markdown files. Four post types, each w
 
 Match frontmatter to the schema in `src/content/config.ts`. Don't add top-level fields without updating that schema.
 
-The `stack` field on `case-study` posts drives the homepage skill bars automatically — no manual curation needed.
+The `stack` field on `case-study` posts drives the homepage skill bars automatically.
 
 ### Adding a post
 
@@ -74,7 +74,7 @@ title: "Post Title"
 date: 2026-07-01
 type: case-study        # case-study | build-log | essay | archive
 tags: [tag-one, tag-two]
-stack: [Astro, React]   # case-study only — drives skill bar panels
+stack: [Astro, React]   # case-study only, drives skill bar panels
 summary: "One-line description shown in the feed and on the homepage."
 github: https://github.com/...   # optional
 demo: https://...                # optional
@@ -97,12 +97,10 @@ For `build-log`, also add `project: <id>` matching an entry in `src/data/activeB
 
 Below 640px the homepage becomes a static full-viewport dock — name, 4 nav links, 3 live deployment links, and social icons. No hero, no scroll. Inner pages scroll normally. The dock and desktop homepage share the same route; a Tailwind `sm` breakpoint switches between them with no JS or UA-sniffing.
 
-See `.claude/mobile-dock-context-pack.md` for full design rationale.
-
 ## Deployment
 
 Deploys automatically to Netlify on push to `main`. Build command: `npm run build`, publish directory: `dist`.
 
 ## Design notes
 
-Dark-mode-first (`#0d0f0e` background, `#f0ece3` text). Fonts: Playfair Display (headings), Inter (body), JetBrains Mono (code/metadata) — self-hosted via `@fontsource`. Full design context and color token decisions are in `.claude/CLAUDE.md`.
+Dark-mode-first (`#0d0f0e` background, `#f0ece3` text). Fonts: Playfair Display (headings), Inter (body), JetBrains Mono (code/metadata) — self-hosted via `@fontsource`.
