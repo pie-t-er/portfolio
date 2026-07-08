@@ -1,0 +1,95 @@
+---
+import Base from './Base.astro';
+import { getBuildLogSeries, getSeriesPosition, getProjectDisplayName } from '../lib/series';
+import { ACTIVE_BUILDS } from '../data/activeBuilds';
+
+interface Props {
+  title: string;
+  date: Date;
+  tags: string[];
+  summary: string;
+  project: string;
+  slug: string;
+}
+
+const { title, date, tags, summary, project, slug } = Astro.props;
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const series = await getBuildLogSeries(project);
+const position = getSeriesPosition(series, slug);
+const showSeriesNav = series.logs.length >= 2;
+const isActiveProject = ACTIVE_BUILDS.some(b => b.id === project);
+const projectLabel = getProjectDisplayName(project, series.caseStudy);
+---
+<Base title={title} description={summary}>
+  <main class="max-w-2xl mx-auto px-6 py-8 sm:py-12">
+    <div class="flex items-center gap-2 text-sm text-ink-muted mb-6">
+      <a href="/blog" class="hover:text-brown-light transition-colors">Blog</a>
+      <span>›</span>
+      <a href="/blog?type=build-log" class="text-brown-light font-medium hover:text-brown transition-colors">Build Log</a>
+    </div>
+
+    <div class="border-l-2 border-brown pl-6 mb-8">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="text-xs font-semibold text-brown-light bg-brown/10 px-2 py-0.5 rounded-full">{projectLabel}</span>
+        <time class="text-xs font-mono text-ink-muted">{formattedDate}</time>
+      </div>
+      <h1 class="text-2xl font-heading font-bold text-ink mb-3">{title}</h1>
+      <p class="text-ink-muted">{summary}</p>
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-3">
+          {tags.map(t => (
+            <a href={`/blog?tag=${t}`} class="text-xs text-ink-muted hover:text-brown-light transition-colors">#{t}</a>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <article class="prose-portfolio">
+      <slot />
+    </article>
+
+    <div class="mt-10 pt-6 border-t border-border-subtle">
+      {showSeriesNav && (
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 text-sm mb-6">
+          <div class="sm:flex-1 sm:min-w-0">
+            {position.prev ? (
+              <a href={`/blog/${position.prev.id}`} class="text-brown-light hover:text-brown transition-colors">
+                ← {position.prev.data.title}
+              </a>
+            ) : (
+              <span class="text-ink-muted">Start of series</span>
+            )}
+          </div>
+          <div class="sm:flex-1 sm:min-w-0 sm:text-right">
+            {position.next && (
+              <a href={`/blog/${position.next.id}`} class="text-brown-light hover:text-brown transition-colors">
+                {position.next.data.title} →
+              </a>
+            )}
+          </div>
+        </div>
+      )}
+
+      {series.caseStudy ? (
+        <a
+          href={`/blog/${series.caseStudy.id}`}
+          class="group block p-5 rounded-xl border border-border-subtle hover:border-forest/40 hover:shadow-sm transition-all"
+        >
+          <p class="text-xs font-semibold text-forest-light uppercase tracking-widest mb-2">Case Study</p>
+          <h3 class="font-heading font-bold text-lg text-ink group-hover:text-forest-light transition-colors mb-1">
+            {projectLabel}
+          </h3>
+          <p class="text-sm text-ink-muted leading-relaxed mb-3">{series.caseStudy.data.summary}</p>
+          <span class="text-sm font-medium text-forest-light">Read the full case study →</span>
+        </a>
+      ) : isActiveProject && (
+        <p class="text-sm text-ink-muted">Case study: in progress</p>
+      )}
+    </div>
+  </main>
+</Base>

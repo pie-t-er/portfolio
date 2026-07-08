@@ -1,0 +1,138 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Let's Build Something"
+  description="Pieter Alley is open to full-time engineering roles and freelance projects. Get in touch."
+>
+  <main class="max-w-2xl mx-auto px-4 sm:px-6 py-16">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-heading font-bold text-ink mb-4">Let's Build Something</h1>
+      <p class="text-lg text-ink-muted leading-relaxed">
+        I'm newly-graduated software engineer and open to what's next. If something on this site caught your eye, I'd like to hear about it.
+      </p>
+    </div>
+
+    <!-- What I'm open to -->
+    <div class="space-y-4 mb-14">
+      <div class="flex gap-4 p-5 rounded-xl border border-border-subtle">
+        <div class="text-2xl leading-none mt-0.5">🏢</div>
+        <div>
+          <h3 class="font-semibold text-ink mb-1">Full-time roles</h3>
+          <p class="text-sm text-ink-muted leading-relaxed">
+            Software engineering; backend, full-stack, or data. I like working on things that are hard
+            to build and worth building. Team culture and interesting problems matter more to me than the job title.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 p-5 rounded-xl border border-border-subtle">
+        <div class="text-2xl leading-none mt-0.5">🔨</div>
+        <div>
+          <h3 class="font-semibold text-ink mb-1">Freelance projects</h3>
+          <p class="text-sm text-ink-muted leading-relaxed">
+            Web apps, data pipelines, greenfield builds, internal tools. When I say I'm open to work, I mean it.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resume -->
+    <div class="mb-12 p-5 rounded-xl bg-bg-surface border border-border-subtle flex items-center justify-between gap-4">
+      <div>
+        <p class="text-sm font-semibold text-ink">Résumé</p>
+        <p class="text-sm text-ink-muted mt-0.5">One-page PDF — updated May 2026.</p>
+      </div>
+      <a
+        href="/assets/Resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="shrink-0 bg-forest text-ink text-sm font-medium px-4 py-2 rounded-lg hover:bg-forest/90 transition-colors"
+      >
+        View PDF
+      </a>
+    </div>
+
+    <!-- Contact form -->
+    <div class="border-t border-border-subtle pt-12">
+      <h2 class="text-xl font-heading font-bold text-ink mb-2">Get in touch</h2>
+      <p class="text-sm text-ink-muted mb-8">I'll get back to you within a few days.</p>
+
+      <form
+        name="contact"
+        method="POST"
+        action="/thanks"
+        netlify
+        class="space-y-5"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="name" class="block text-sm font-medium text-ink mb-1.5">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full px-3 py-2.5 bg-bg-surface border border-border-subtle rounded-lg text-sm text-ink placeholder-ink-muted/60
+                     focus:outline-none focus:ring-2 focus:ring-forest-light/40 focus:border-forest-light transition-colors"
+              placeholder="Your name"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-ink mb-1.5">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-3 py-2.5 bg-bg-surface border border-border-subtle rounded-lg text-sm text-ink placeholder-ink-muted/60
+                     focus:outline-none focus:ring-2 focus:ring-forest-light/40 focus:border-forest-light transition-colors"
+              placeholder="you@example.com"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="context" class="block text-sm font-medium text-ink mb-1.5">
+            What's this about?
+          </label>
+          <select
+            id="context"
+            name="context"
+            class="w-full px-3 py-2.5 bg-bg-surface border border-border-subtle rounded-lg text-sm text-ink
+                   focus:outline-none focus:ring-2 focus:ring-forest-light/40 focus:border-forest-light transition-colors"
+          >
+            <option value="job">Job opportunity</option>
+            <option value="freelance">Freelance project</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium text-ink mb-1.5">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="5"
+            class="w-full px-3 py-2.5 bg-bg-surface border border-border-subtle rounded-lg text-sm text-ink placeholder-ink-muted/60
+                   focus:outline-none focus:ring-2 focus:ring-forest-light/40 focus:border-forest-light transition-colors resize-y"
+            placeholder="Tell me about the role or project. The more context the better."
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="bg-forest text-ink px-6 py-2.5 rounded-lg text-sm font-medium
+                 hover:bg-forest/90 transition-colors"
+        >
+          Send message
+        </button>
+      </form>
+    </div>
+
+  </main>
+</Base>

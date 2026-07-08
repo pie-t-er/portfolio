@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-ink antialiased;
+  }
+}
+
+@layer utilities {
+  .prose-portfolio {
+    @apply prose prose-slate max-w-none
+      prose-headings:font-heading
+      prose-headings:text-ink
+      prose-headings:font-bold
+      prose-p:text-ink/90
+      prose-a:text-forest-light
+      prose-a:no-underline
+      hover:prose-a:underline
+      prose-strong:text-ink
+      prose-blockquote:text-ink-muted
+      prose-blockquote:border-forest
+      prose-li:text-ink/90
+      prose-hr:border-border-subtle
+      prose-code:font-mono
+      prose-code:text-forest-light
+      prose-code:bg-bg-surface
+      prose-code:px-1
+      prose-code:py-0.5
+      prose-code:rounded
+      prose-code:text-sm
+      prose-code:before:content-none
+      prose-code:after:content-none;
+  }
+}

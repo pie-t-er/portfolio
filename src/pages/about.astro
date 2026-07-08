@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroTexture from '../components/patterns/HeroTexture.astro';
+import CardAccent from '../components/patterns/CardAccent.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+---
+<Base title="About" description="About Pieter Alley — software engineer, builder, and occasional camp counselor.">
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+
+    <!-- Header -->
+    <div class="relative mb-16">
+      <HeroTexture opacity={0.05} />
+      <p class="text-forest-light font-mono text-sm mb-3 tracking-wide">About me</p>
+      <h1 class="text-4xl font-heading font-bold text-ink mb-6">Pieter Alley</h1>
+      <p class="text-xl font-heading text-ink-muted leading-relaxed max-w-2xl">
+        At six-foot-six, I'm hard to miss in a room. I grew up everywhere, which is why I care about building things that work for people everywhere.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <!-- Main bio -->
+      <div class="lg:col-span-2 space-y-10">
+
+        <section>
+          <h2 class="text-lg font-heading font-bold text-ink mb-4">Background</h2>
+          <div class="prose prose-slate max-w-none text-ink-muted leading-relaxed space-y-4">
+            <p>
+              I'm a Third Culture Kid. Until I was 12, I'd never lived in the same country for more than four years. My Dutch-American family spent most of my childhood in Southeast Asia. My first words were in Dutch, my second words were in English, and by four I was trilingual in Dutch, English, and Thai. We moved to a village of about 10 million people just outside Shanghai not long after, where my parents put me in a Chinese public school and told the teachers not to give me any special treatment.
+            </p>
+            <p>
+              That upbringing left me with something I don't have a clean word for; a default instinct to look at any situation through more than one cultural lens. It's not something CS programs teach, but it shapes how I think about design and what "success" actually means.
+            </p>
+            <p>
+              I studied Computer Science at the University of Florida, where I spent four years building things, breaking things, and learning the difference between code that works and code that's good. My senior capstone was <a href="/blog/cloak-ai" class="text-forest-light hover:text-forest transition-colors">Cloak AI</a>, a wardrobe management app with an AI shopping assistant, which I led as team lead while building the data pipeline that made the demo work. I since rebuilt this project from scratch and deployed it as <a href="/blog/virgo" class="text-forest-light hover:text-forest transition-colors">Virgo</a>.
+            </p>
+            <p>
+              In Summer 2024 I interned abroad in Ghana through a UF program, splitting time between UI/UX coursework, cultural excursions throughout Ghana, and building a real product for a non-profit in Accra. I ended up as design lead despite having no prior web development experience. You can read the full reflection <a href="/blog/ghana-reflection" class="text-forest-light hover:text-forest transition-colors">here</a>.
+            </p>
+            <p>
+              Before I was writing software full-time, I spent summers as a camp counselor at Chanco on the James in Virginia. Camp taught me things that CS programs don't: how to hold a group's attention, how to stay patient when things go sideways, and how to find the approach that works for the specific people in front of you, not the theoretical ones. I'm returning to camp for a couple weeks on the tail end of this summer, should make for a rejuvinating experience.
+            </p>
+            <p>
+              Off the clock, that same curiosity just points somewhere less professional; I'll go down a rabbit hole on history or theory as readily as a stack trace, and a pickup soccer game or an overly ambitious dinner is still the fastest way to get me to close the laptop.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-heading font-bold text-ink mb-4">How I work</h2>
+          <div class="prose prose-slate max-w-none text-ink-muted leading-relaxed space-y-4">
+            <p>
+              My time in Ghana pushed me to think about who technology actually serves. Thinking about UI/UX design in a country with high mobile penetration but inconsistent WiFi, and visiting a village where people had everything they needed without any of it, made me skeptical of the engineering instinct to treat development as inherently good. I try to carry that into how I approach product decisions. Beyond "Less is more", I believe I have a unique instinct for measured design.
+            </p>
+            <p>
+              I actually like writing about my coding and design process, I've begun to find my own voice as a writer, and I would like this blog to be the place where that creativity lives. I'm spending my unemployment refurbishing projects from my undergrad degree, which has yielded some interesting case studies, read about them on this site.
+            </p>
+            <p>
+              I also work with AI tools where they make sense. This portfolio was built with
+              <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer" class="text-forest-light hover:text-forest transition-colors">Claude Code</a>
+              — an agentic coding tool by Anthropic — handling the majority of the implementation while I provided direction, review, and the judgment calls. I think that's an honest way to work: use the tool, own the decisions.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-lg font-heading font-bold text-ink mb-4">What I'm building now</h2>
+          <div class="text-ink-muted leading-relaxed space-y-3">
+            <p>
+              Right now I'm focused on employment, either full-time or as a freelance collaborator. This website is intentionally made to exhibit my talent as a designer, programmer, and engineer. If something on this portfolio caught your eye, don't hesitate to reachout!
+            </p>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-8">
+
+        <div class="relative bg-bg-surface border border-border-subtle rounded-xl p-5">
+          <CardAccent color="forest" />
+          <p class="text-xs font-semibold text-ink-muted uppercase tracking-widest mb-3">Currently</p>
+          <ul class="space-y-2 text-sm text-ink-muted">
+            <li class="flex items-start gap-2">
+              <span class="text-forest-light mt-0.5">→</span>
+              Building this portfolio in public
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-forest-light mt-0.5">→</span>
+              Revamping projects from my undergrad
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-forest-light mt-0.5">→</span>
+              Open to full-time roles & freelance work
+            </li>
+          </ul>
+        </div>
+
+        <div class="relative bg-bg-surface border border-border-subtle rounded-xl p-5">
+          <CardAccent color="purple" />
+          <p class="text-xs font-semibold text-ink-muted uppercase tracking-widest mb-3">Education</p>
+          <p class="text-sm font-medium text-ink">University of Florida</p>
+          <p class="text-sm text-ink-muted">B.S. Computer Science</p>
+          <p class="text-xs text-ink-muted/70 mt-1.5">Cum Laude · GPA: 3.28</p>
+        </div>
+
+        <div class="relative bg-bg-surface border border-border-subtle rounded-xl p-5">
+          <CardAccent color="navy" />
+          <p class="text-xs font-semibold text-ink-muted uppercase tracking-widest mb-3">Find me</p>
+          <SocialLinks class="space-y-2" iconSize="w-4 h-4" showLabels={true} />
+        </div>
+
+        <a
+          href="/work-with-me"
+          class="block w-full text-center bg-forest text-ink px-5 py-3 rounded-lg font-medium hover:bg-forest/90 transition-colors text-sm"
+        >
+          Let's build something →
+        </a>
+
+      </div>
+    </div>
+
+  </main>
+</Base>

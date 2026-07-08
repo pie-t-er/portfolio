@@ -1,0 +1,72 @@
+---
+import { getCollection, render } from 'astro:content';
+import CaseStudyLayout from '../../layouts/CaseStudy.astro';
+import BuildLogLayout from '../../layouts/BuildLog.astro';
+import EssayLayout from '../../layouts/Essay.astro';
+import ArchiveLayout from '../../layouts/Archive.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const type = post.data.type;
+---
+
+{type === 'case-study' && (
+  <CaseStudyLayout
+    title={post.data.title}
+    projectName={post.data.projectName}
+    summary={post.data.summary}
+    date={post.data.date}
+    stack={post.data.stack}
+    tags={post.data.tags}
+    github={post.data.github}
+    demo={post.data.demo}
+    project={post.data.project}
+  >
+    <Content />
+  </CaseStudyLayout>
+)}
+
+{type === 'build-log' && (
+  <BuildLogLayout
+    title={post.data.title}
+    date={post.data.date}
+    tags={post.data.tags}
+    summary={post.data.summary}
+    project={post.data.project}
+    slug={post.id}
+  >
+    <Content />
+  </BuildLogLayout>
+)}
+
+{type === 'essay' && (
+  <EssayLayout
+    title={post.data.title}
+    date={post.data.date}
+    tags={post.data.tags}
+    summary={post.data.summary}
+  >
+    <Content />
+  </EssayLayout>
+)}
+
+{type === 'archive' && (
+  <ArchiveLayout
+    title={post.data.title}
+    date={post.data.date}
+    tags={post.data.tags}
+    summary={post.data.summary}
+    course={post.data.course}
+    retrospective={post.data.retrospective}
+  >
+    <Content />
+  </ArchiveLayout>
+)}

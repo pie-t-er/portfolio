@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import BlogFeed from '../../components/BlogFeed.jsx';
+import { getProjectDisplayName } from '../../lib/series';
+
+const allPosts = await getCollection('blog');
+
+const caseStudiesByProject = new Map(
+  allPosts
+    .filter(p => p.data.type === 'case-study' && p.data.project)
+    .map(p => [p.data.project!, p])
+);
+
+const posts = allPosts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .map(p => ({
+    id: p.id,
+    title: p.data.title,
+    projectName: p.data.projectName ?? null,
+    projectLabel: p.data.project ? getProjectDisplayName(p.data.project, caseStudiesByProject.get(p.data.project)) : null,
+    date: p.data.date.toISOString(),
+    type: p.data.type,
+    tags: p.data.tags,
+    stack: p.data.stack,
+    summary: p.data.summary,
+  }));
+---
+<Base title="Blog" description="Case studies, build logs, and essays by Pieter Alley.">
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div class="mb-10">
+      <h1 class="text-4xl font-heading font-bold text-ink mb-3">Blog</h1>
+      <p class="text-ink-muted text-lg">
+        Case studies on projects I've built, a running log of my projects are built, and personal reflections.
+      </p>
+    </div>
+    <BlogFeed posts={posts} client:load />
+  </main>
+</Base>

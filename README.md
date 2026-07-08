@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+# Pieter Alley — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal portfolio and blog for an active software engineering / data science job search. Built with Astro 5, React islands, and Tailwind CSS. Deploys to Netlify on push to `main`.
 
-## Available Scripts
+> The majority of this site was built with [Claude Code](https://claude.ai/code), an agentic AI coding tool by Anthropic, with human direction and review.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Running locally
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm install
+npm run dev       # dev server at http://localhost:4321
+npm run build     # production build
+npm run preview   # preview production build locally
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Node 20+ required.
 
-### `npm test`
+## Project structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+  components/         # Astro + React components
+    patterns/         # Decorative SVG components (Divider, CardAccent, HeroTexture)
+    SocialLinks.astro # GitHub / LinkedIn / Instagram icon links — single source of truth
+    Navbar.astro      # Sticky header; hidden on mobile homepage via hideOnMobile prop
+    Footer.astro
+    BlogFeed.jsx      # React island — filterable blog feed
+    SkillBars.jsx     # React island — skill panels driven by case-study stack tags
+  content/
+    blog/             # All posts as .md files
+    config.ts         # Content collection schema
+  data/
+    activeBuilds.ts   # Projects shown in the "Active Builds" homepage widget
+    liveDeployments.ts # Live demo links — homepage card grid + mobile dock
+    skills.ts         # Skill groups for the homepage skill bars
+  layouts/
+    Base.astro        # Shell (Navbar, Footer, fonts). Props: noFooter, hideMobileNav
+    CaseStudy.astro
+    BuildLog.astro
+    Essay.astro
+    Archive.astro
+  pages/
+    index.astro
+    about.astro
+    blog/
+    work-with-me.astro
+    thanks.astro
+  styles/
+    global.css
+```
 
-### `npm run build`
+## Content model
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+All posts live in `src/content/blog/` as Markdown files. Four post types, each with its own layout and accent color:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Type | Layout | Accent | Use for |
+|------|--------|--------|---------|
+| `case-study` | `CaseStudy.astro` | forest | Long-form project writeups with stack/github/demo metadata |
+| `build-log` | `BuildLog.astro` | brown | Short changelog entries tied to an active project via `project` field |
+| `essay` | `Essay.astro` | purple | Personal, non-technical writing |
+| `archive` | `Archive.astro` | navy | Old college writing — renders with an "unrevised" disclaimer banner |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Match frontmatter to the schema in `src/content/config.ts`. Don't add top-level fields without updating that schema.
 
-### `npm run eject`
+The `stack` field on `case-study` posts drives the homepage skill bars automatically — no manual curation needed.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Adding a post
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```yaml
+---
+title: "Post Title"
+date: 2026-07-01
+type: case-study        # case-study | build-log | essay | archive
+tags: [tag-one, tag-two]
+stack: [Astro, React]   # case-study only — drives skill bar panels
+summary: "One-line description shown in the feed and on the homepage."
+github: https://github.com/...   # optional
+demo: https://...                # optional
+---
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+For `build-log`, also add `project: <id>` matching an entry in `src/data/activeBuilds.ts`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Homepage data files
 
-## Learn More
+**`src/data/activeBuilds.ts`** — drives the "Active Builds" widget. Add a project here while it's in active development; remove it and write a case study when it ships.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**`src/data/liveDeployments.ts`** — drives the "Live" section on the desktop homepage and the deployment links in the mobile dock. Fields:
+- `name` — display name
+- `description` — one-liner shown on the desktop card
+- `url` — external link (opens in new tab)
+- `caseStudy` *(optional)* — blog post slug; adds "Read case study →" on the desktop card
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Mobile
 
-### Code Splitting
+Below 640px the homepage becomes a static full-viewport dock — name, 4 nav links, 3 live deployment links, and social icons. No hero, no scroll. Inner pages scroll normally. The dock and desktop homepage share the same route; a Tailwind `sm` breakpoint switches between them with no JS or UA-sniffing.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+See `.claude/mobile-dock-context-pack.md` for full design rationale.
 
-### Analyzing the Bundle Size
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Deploys automatically to Netlify on push to `main`. Build command: `npm run build`, publish directory: `dist`.
 
-### Making a Progressive Web App
+## Design notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Dark-mode-first (`#0d0f0e` background, `#f0ece3` text). Fonts: Playfair Display (headings), Inter (body), JetBrains Mono (code/metadata) — self-hosted via `@fontsource`. Full design context and color token decisions are in `.claude/CLAUDE.md`.

@@ -1,0 +1,28 @@
+---
+interface Props {
+  color?: 'forest' | 'brown' | 'purple' | 'navy' | 'border';
+  class?: string;
+}
+
+const { color = 'border', class: className = '' } = Astro.props;
+
+const STROKE: Record<string, string> = {
+  forest: '#2d6a4f',
+  brown: '#7c4a2d',
+  purple: '#4a2d6e',
+  navy: '#1e3a5f',
+  border: '#2a3030',
+};
+
+const stroke = STROKE[color];
+const patternId = `divider-${color}-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class={`w-full overflow-hidden ${className}`} role="presentation" aria-hidden="true">
+  <svg viewBox="0 0 240 8" preserveAspectRatio="none" class="w-full h-2">
+    <pattern id={patternId} width="24" height="8" patternUnits="userSpaceOnUse">
+      <path d="M0 8 L8 0 L16 8 L24 0" fill="none" stroke={stroke} stroke-width="1" opacity="0.6" />
+    </pattern>
+    <rect width="240" height="8" fill={`url(#${patternId})`} />
+  </svg>
+</div>

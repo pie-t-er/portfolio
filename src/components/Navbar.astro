@@ -1,0 +1,90 @@
+---
+interface Props {
+  hideOnMobile?: boolean;
+}
+
+const { hideOnMobile = false } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/about', label: 'About' },
+  { href: '/work-with-me', label: "Let's Build" },
+];
+
+// Mobile dropdown mirrors the homepage link-tree dock, so it also includes Résumé.
+const mobileNavLinks = [
+  ...navLinks,
+  { href: '/assets/Resume.pdf', label: 'Résumé', external: true },
+];
+
+const currentPath = Astro.url.pathname;
+---
+<header class={`sticky top-0 z-50 bg-bg/90 backdrop-blur-sm border-b border-border-subtle${hideOnMobile ? ' hidden sm:block' : ''}`}>
+  <nav class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <a href="/" class="text-lg font-heading font-bold text-ink hover:text-forest-light transition-colors">
+      Pieter Alley
+    </a>
+
+    <div class="hidden sm:flex gap-6">
+      {navLinks.map(({ href, label }) => (
+        <a
+          href={href}
+          class={`text-sm font-medium transition-colors hover:text-forest-light ${
+            currentPath === href ? 'text-forest-light' : 'text-ink-muted'
+          }`}
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+
+    <button
+      id="nav-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="nav-mobile-menu"
+      class="sm:hidden -mr-2 p-2 text-ink-muted hover:text-forest-light transition-colors"
+    >
+      <svg id="nav-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg id="nav-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="nav-mobile-menu" class="hidden sm:hidden border-t border-border-subtle px-4 py-3">
+    <nav class="flex flex-col gap-2">
+      {mobileNavLinks.map(({ href, label, external }) => (
+        <a
+          href={href}
+          target={external ? '_blank' : undefined}
+          rel={external ? 'noopener noreferrer' : undefined}
+          class={`px-4 py-3 rounded-lg border border-border-subtle text-base transition-colors hover:text-forest-light hover:border-forest/40 ${
+            currentPath === href ? 'text-forest-light' : 'text-ink-muted'
+          }`}
+        >
+          {label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('nav-mobile-menu');
+  const iconOpen = document.getElementById('nav-icon-open');
+  const iconClose = document.getElementById('nav-icon-close');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.contains('hidden') === false;
+    menu?.classList.toggle('hidden');
+    iconOpen?.classList.toggle('hidden');
+    iconClose?.classList.toggle('hidden');
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+</script>

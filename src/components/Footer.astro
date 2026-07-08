@@ -1,0 +1,19 @@
+---
+import Divider from './patterns/Divider.astro';
+import SocialLinks from './SocialLinks.astro';
+---
+<Divider color="border" class="opacity-80" />
+<footer class="pt-10 pb-8 bg-bg-surface">
+  <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-ink-muted">
+    <span>© {new Date().getFullYear()} Pieter Alley</span>
+    <div class="flex flex-wrap justify-center items-center gap-6">
+      <a href="/blog" class="hover:text-forest-light transition-colors">Blog</a>
+      <a href="/about" class="hover:text-forest-light transition-colors">About</a>
+      <a href="/work-with-me" class="hover:text-forest-light transition-colors">Let's Build</a>
+      <a href="/assets/Resume.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-forest-light transition-colors">Résumé</a>
+      <div class="border-l border-border-subtle pl-6">
+        <SocialLinks class="flex items-center gap-4" />
+      </div>
+    </div>
+  </div>
+</footer>

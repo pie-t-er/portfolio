@@ -1,0 +1,62 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  tags: string[];
+  summary: string;
+  course?: string;
+  retrospective?: string;
+}
+
+const { title, date, tags, summary, course, retrospective } = Astro.props;
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+<Base title={title} description={summary}>
+  <main class="max-w-2xl mx-auto px-6 py-8 sm:py-12">
+    <div class="flex items-center gap-2 text-sm text-ink-muted mb-6">
+      <a href="/blog" class="hover:text-navy-light transition-colors">Blog</a>
+      <span>›</span>
+      <a href="/blog?type=archive" class="text-navy-light font-medium hover:text-navy transition-colors">Archive</a>
+    </div>
+
+    <!-- Disclaimer banner — left-border + distinct surface tone keeps the "unrevised" signal even without amber -->
+    <div class="bg-bg-surface-2 border-l-4 border-navy rounded-r-xl px-5 py-4 mb-10 text-sm text-ink-muted leading-relaxed">
+      <p>
+        <strong class="text-ink">Academic writing.</strong> This piece was written{course ? <> for <em class="text-navy-light">{course}</em></> : null} on <time>{formattedDate}</time> and hasn't been revised for publication. The ideas here represent where my thinking was at the time — not necessarily where it is now. Read accordingly.
+      </p>
+      {retrospective && (
+        <p class="mt-2">
+          For context on what I actually took away from this: <a href={`/blog/${retrospective}`} class="underline underline-offset-2 text-navy-light hover:text-navy transition-colors">read the retrospective →</a>
+        </p>
+      )}
+    </div>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-heading font-bold text-ink mb-4 leading-tight">{title}</h1>
+      <p class="text-ink-muted text-lg leading-relaxed">{summary}</p>
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {tags.map(t => (
+            <span class="text-xs text-ink-muted">#{t}</span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <article class="prose-portfolio">
+      <slot />
+    </article>
+
+    <div class="mt-12 pt-6 border-t border-border-subtle">
+      <a href="/blog?type=archive" class="text-sm text-navy-light hover:text-navy transition-colors">
+        ← All archive posts
+      </a>
+    </div>
+  </main>
+</Base>

@@ -1,16 +1,6 @@
 [build]
-  command = "yarn install && CI=false yarn build"
-  publish = "build"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  command = "npm install && npm run build"
+  publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "16.20.2"
-  SKIP_PYTHON_SETUP = "true"
-  PYTHON_VERSION = ""
-
-[build.processing]
-  skip_processing = true
+  NODE_VERSION = "20"

@@ -19,12 +19,16 @@
 # production
 /build
 
+# build cache
+.astro
+
 # misc
 .DS_Store
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.claude
 
 npm-debug.log*
 yarn-debug.log*
