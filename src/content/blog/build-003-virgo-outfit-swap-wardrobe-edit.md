@@ -1,5 +1,5 @@
 ---
-title: "Build Log #003: Swapping Outfits and Editing Wardrobe Items
+title: "Build Log #003: Swapping Outfits and Editing Wardrobe Items"
 date: 2026-06-24
 type: build-log
 tags: [meta, virgo, react, ux, agent-tools]

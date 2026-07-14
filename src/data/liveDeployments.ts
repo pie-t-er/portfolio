@@ -16,5 +16,6 @@ export const LIVE_DEPLOYMENTS: LiveDeployment[] = [
     name: 'Virgo',
     description: 'AI-powered wardrobe management agent.',
     url: 'https://virgo-85048588163.us-central1.run.app/',
+    caseStudy: 'virgo',
   },
 ];
