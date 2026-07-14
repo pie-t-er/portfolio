@@ -17,9 +17,4 @@ export const LIVE_DEPLOYMENTS: LiveDeployment[] = [
     description: 'AI-powered wardrobe management agent.',
     url: 'https://virgo-85048588163.us-central1.run.app/',
   },
-  {
-    name: 'j*brunner',
-    description: 'My personal job search dashboard, deployed as a demo.',
-    url: 'https://j-brunner-demo.onrender.com/',
-  },
 ];
