@@ -42,10 +42,10 @@ import Base from '../layouts/Base.astro';
     <div class="mb-12 p-5 rounded-xl bg-bg-surface border border-border-subtle flex items-center justify-between gap-4">
       <div>
         <p class="text-sm font-semibold text-ink">Résumé</p>
-        <p class="text-sm text-ink-muted mt-0.5">One-page PDF — updated May 2026.</p>
+        <p class="text-sm text-ink-muted mt-0.5">One page PDF — updated September 2026.</p>
       </div>
       <a
-        href="/assets/Resume.pdf"
+        href="/assets/Pieter_Alley.pdf"
         target="_blank"
         rel="noopener noreferrer"
         class="shrink-0 bg-forest text-ink text-sm font-medium px-4 py-2 rounded-lg hover:bg-forest/90 transition-colors"
@@ -56,14 +56,13 @@ import Base from '../layouts/Base.astro';
 
     <!-- Contact form -->
     <div class="border-t border-border-subtle pt-12">
-      <h2 class="text-xl font-heading font-bold text-ink mb-2">Get in touch</h2>
-      <p class="text-sm text-ink-muted mb-8">I'll get back to you within a few days.</p>
+      <h2 class="text-xl font-heading font-bold text-ink mb-6">Get in touch</h2>
 
       <form
         name="contact"
         method="POST"
         action="/thanks"
-        netlify
+        data-netlify="true"
         class="space-y-5"
       >
         <input type="hidden" name="form-name" value="contact" />
